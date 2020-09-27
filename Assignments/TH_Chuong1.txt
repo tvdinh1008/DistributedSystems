@@ -1,0 +1,38 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+
+
+
+Câu 1:
+Đường dẫn đến file html chứa nội dung mặc định là:
+/var/www/html/index.html
+
+Câu 2:
+Cổng mặc định của dịch vụ www: 80
+
+Câu 3:
+Quyền 755 là user có quyền Read, Write và Excute.
+group và others có quyền read và Excute.
+
+Câu 4:
+Nội dung của 2 file html trong thư mục test.com và example.com là nội dung mình vừa chỉnh sửa ở phần hướng dẫn trên.
+
+Câu 5:
+Bình thường không cấu hình thêm gì thì các máy khác trong cùng LAN không hiển thị được 2 trang web kia. Do không phân giải được tên miền
+Cấu hình thêm file C:\Windows\System32\drivers\etc\hosts
+192.168.1.53    example.com
+192.168.1.53    test.com
+Thì lúc này sẽ hiển thị đươc 2 trang web như bình thường.
+
+Câu 6:
+while (out != null) {
+	String message = scanner.nextLine();
+	if(message==null || message.isEmpty()) {
+		break;
+	}
+	out.println(message);
+}
+
+Câu 7:
+Phương thức run sẽ được gọi khi có client kết nối đến và được accept. Khi đó việc trao đổi, xử lý sẽ nằm trong phương thức này.

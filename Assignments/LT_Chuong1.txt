@@ -1,0 +1,73 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+
+Câu 1:
+- Các mô hình hệ phân tán khác:
+	+ Internet, Intranets
+	+ Electronic banking
+	+ Sensor networks
+	+ Trò chơi trực tuyến
+	+ Ứng dụng trong kinh doanh trực tuyến như mua bán chứng khoán
+	
+- Chúng là hệ phân tán bởi vì thỏa mãn 4 tính chất:
+	- Tính chia sẻ tài nguyên.
+	- Tính trong suốt.
+	- Tính mở.
+    	- Tính co giãn.
+
+Câu 2:
+Trong hệ phân tán kết nối các máy tính với nhau và các tài nguyên được quản lý bởi chương trình quản lý tài nguyên.
+Giảm chi phí đầu tư: Máy tính của người sử dụng có thể truy cập tài nguyên không nằm trên máy tính của mình ví dụ như máy in, tệp, máy quay,..=>số lượng đầu tư cho thiết bị ngoại vi cho máy tính sẽ giảm đi=>giảm suất dầu tư cho người sử dụng
+
+Tăng tính sẵn sàng: Việc cho phép NSD kết nối các tài nguyên ở xa và các máy khác nhau làm tăng khả năng sẵn sàng của hệ thống. Khi tài nguyên nào đó không sẵn sàng người sử dụng hoàn toàn có thể sử dụng một tài nguyên cùng loại trên một máy tính khác.
+Hỗ trợ làm việc nhóm: Do chia sẻ tài nguyên nên mọi người trong nhóm có thể lấy được tài liệu chia sẻ của nhau một cách dễ dàng
+
+Tăng rủi ro về an toàn thông tin do:
+- Chương trình có những kết nối mạng => có lỗ hổng bảo mật => giảm mức độ an toàn bảo mật của hệ thống.
+- Khi quá trình chia sẻ thông tin kéo dài việc theo dõi tất cả thông tin được phép chia sẻ có thể tìm ra những thông tin ẩn, từ đó có những thông tin liên quan đến tính riêng tư có thể bị lộ.
+- Mạo danh, phát tán thông tin sai,...
+Câu 3:
+Nhà quản trị hệ thống phải xem xét việc cân bằng giữa hiệu năng và độ trong suốt:
+	+ Hiệu năng và độ trong suốt tỉ lệ nghịch với nhau.
+    	+ Cần phân tích từng hệ thống để có tỉ lệ cân bằng phù hợp, vừa đảm bảo hiệu năng vừa đảm bảo tính trong suốt.
+
+Ví dụ: Trình duyệt web ->có bộ nhớ đệm-> Đôi khi có sự thay đổi trên server mà trên trình duyệt vẫn chưa thay đổi. Để trong suốt tuyệt đối thì nội dung trên server lúc nào cũng giống như trong bộ nhớ đệm-> sẽ phải tốn hiệu năng lớn để đồng bộ mỗi khi server thay đổi thì trên trình duyệt cũng thay đổi.
+
+Câu 4:
+Interface quan trọng với tính mở của hệ phân tán do:
+- Một hệ thống có tính mở là hệ thống cho phép các thành phần được sản xuất bởi các nhà sản xuất khác nhau và có thể thay thế lẫn nhau, đồng thời cũng có khả năng cho phép thành phần mới bổ sung vào hệ thống.
+- Cung cấp các dịch vụ theo các đặc tả về cú pháp và ngữ nghĩa của các dịch vụ
+- Interface cho phép thực hiện thao tác với dữ liệu hệ thống và "ẩn" các thành phần bên trong hệ thống
+- Đảm bảo tính trong suốt cho hệ thống.
+
+Câu 5:
+So sánh 2 kiểu HĐH DOS và NOS.
++---------------------------+-------------------------------------------+-------------------+
+|                           |               Distributed OS              |                   |
+|           Item            |-------------------------------------------|   Network OS      |
+|                           |       Multiproc      |    Multicomp       |                   |
+|---------------------------+----------------------+--------------------+-------------------|
+| Degree of transparency    |       Very High      |        High        |       Low         |
+|---------------------------+----------------------+--------------------+-------------------|
+| Same OS on all nodes      |           Yes        |        Yes         |       NOS         |
+|---------------------------+----------------------+--------------------+-------------------|
+| Number of copies of OS    |           1          |        N           |       Network     |
+|---------------------------+----------------------+--------------------+-------------------|
+| Basic for communication   |   Shared memory      |    Messages        |       Files       |
+|---------------------------+----------------------+--------------------+-------------------|
+| Resource management       |   Global, central    | Global, distributed|      Per node     |
+|---------------------------+----------------------+--------------------+-------------------|
+| Scalability               |           No         |    Moderately      |       Yes         |
+|---------------------------+----------------------+--------------------+-------------------|
+| Openness                  |       Closed         |       Closed       |       Openness    |
++---------------------------+-------------------------------------------+-------------------+
+
+Từ trên ta thấy: 
+	DOS có tính trong suốt cao nhưng vấn đề của nó là khó có thể mở rộng và truy cập từ xa do yêu cầu về tính thuần nhất cao.
+	NOS có thể mở rộng và truy cập từ xa dễ dàng nhưng tính trong suốt lại không cao
+==> Middleware là sự kết hợp ưu điểm của DOS và NOS
+	+ Kế thừa tính trong suốt của DOS và tính mở của NOS
+	+ Truy cập trong suốt, các phương tiện trao đổi thông tin bậc cao, dịch vụ định danh, dịch vụ lưu trữ bền vững,..
+	
+
