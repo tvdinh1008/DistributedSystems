@@ -1,0 +1,81 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+
+
+Câu 1.
+Kiến trúc phân tầng OSI của Mạng máy tính:
+- Tầng Ứng dụng (Application): cung cấp các ứng dụng trên mạng (web, email, truyền file…)
+- Tầng Trình diễn (Presentation): biểu diễn dữ liệu của ứng dụng, e.g., mã hóa, nén, chuyển đổi…
+- Tầng Phiên(Session): quản lý phiên làm việc, đồng bộ hóa phiên, khôi phục quá trình trao đổi dữ liệu
+- Tầng Giao vận (Transport): Xử lý việc truyền-nhận dữ liệu cho các ứng dụng chạy trên nút mạng đầucuối
+- Tầng Mạng (Network): Chọn đường (định tuyến), chuyển tiếp gói tin từ nguồn đến đích
+- Tầng Liên kết dữ liệu (Data link): Truyền dữ liệu trên các liên kết vật lý giữa các nút mạng kế tiếp nhau
+- Tầng Vật lý (Physical): Chuyển dữ liệu (bit) thành tín hiệu và truyền
+
+Ví dụ:Khi địa chỉ ipv4 dần cạn kiệt, ta sẽ thay đổi IPv4 sang IPv6 thì cũng không ảnh hưởng tới các tầng khác do các tầng thì độc lập với nhau
+
+Câu 2.
+ví dụ giao thức MQTT áp dụng mô hình kiến trúc publish/subscribe:
++publish: gửi dữ liệu theo 1 topic nào đó tới MQTT broker
++subscribe: đăng ký nhận dữ liệu topic và khi publisher gửi dữ liệu thì subscriber sẽ nhận được dữ liệu qua MQTT broker.
+
+Câu 3.
+- Phân phối dọc(vertical distribution): chia ứng dụng ra thành các phần như giao diện, các thành phần xử lý và thành phần dữ liệu. Các phần khác nhau này có liên quan trực tiếp đến việc tổ chức logic của ứng dụng. Trong nhiều trường hợp, việc xử lý phân tán có thể được hiểu là tổ chức ứng dụng client-server đó như một kiến trúc nhiều phần.
+	+ Xử lí nhiều lớp trên nhiều thiết bị
+	+ Tăng cường khả năng xử lý bằng cách nâng cấp cấu hình máy trong hệ thống Ram, CPU,..
+
+- Phân phối ngang(horizontal distribution): một client hay server có thể bị phân chia một cách vật lý thành các phần, mỗi phần hoạt động trên phần mà nó được chia sẻ từ một tập dữ liệu hoàn chỉnh. Đây là cơ chế cân bẳng tải(nhân bản một chức năng của server lên nhiều máy).
+	+ Xử lí một lớp trên nhiều thiết bị  
+	+ Tăng cường khả năng xử lý bằng cách thêm máy vào trong hệ thống
+
+Câu 4.
++ kiến trúc tập trung
+- Nhược điểm: 
+	+ Không thể mở rộng quy mô theo chiều dọc sau một giới hạn nhất định - Sau một giới hạn, ngay cả khi bạn tăng khả năng phần cứng và phần mềm của nút máy chủ, hiệu suất sẽ không tăng 	  đáng kể dẫn đến tỷ lệ chi phí / lợi ích <1.
+	+ Sự tắc nghẽn có thể xuất hiện khi lưu lượng truy cập tăng đột biến - vì máy chủ chỉ có thể có một số lượng hữu hạn các cổng mở có thể lắng nghe các kết nối từ các nút máy khách. 	  Vì vậy, khi lưu lượng truy cập cao xảy ra như bán hàng mua sắm, máy chủ về cơ bản có thể bị tấn công Từ chối Dịch vụ hoặc Tấn công Từ chối Dịch vụ Phân tán.
+	+ Phụ thuộc nhiều vào kết nối mạng - Hệ thống có thể bị lỗi nếu các nút bị mất kết nối vì chỉ có một nút trung tâm.
+	  Không có sự xuống cấp của hệ thống - lỗi đột ngột của toàn bộ hệ thống
+	+ Ít khả năng sao lưu dữ liệu. Nếu nút máy chủ bị lỗi và không có bản sao lưu, bạn sẽ mất dữ liệu ngay lập tức
+	+ Bảo trì máy chủ khó khăn - Chỉ có một nút máy chủ và vì lý do khả dụng, việc đưa máy chủ xuống để bảo trì là không hiệu quả và không chuyên nghiệp. Vì vậy, các bản cập nhật phải 	  được thực hiện ngay lập tức (cập nhật nóng) rất khó và hệ thống có thể bị hỏng.
+- Ưu điểm:
+	+ Dễ dàng bảo mật vật lý. Dễ dàng bảo mật và phục vụ các nút máy chủ và máy khách nhờ vị trí của chúng
+	+ Trải nghiệm cá nhân mượt mà và thanh lịch - Khách hàng có một hệ thống chuyên dụng mà anh ta sử dụng (ví dụ: máy tính cá nhân) và công ty có một hệ thống tương tự có thể được sửa 	  đổi để phù hợp với nhu cầu tùy chỉnh
+	+ Tài nguyên chuyên dụng (bộ nhớ, lõi CPU, v.v.)
+	+ Tiết kiệm chi phí hơn cho các hệ thống nhỏ đến một giới hạn nhất định - Vì các hệ thống trung tâm tốn ít tiền hơn để thiết lập, chúng có lợi thế hơn khi phải xây dựng các hệ thống 	  nhỏ
+	+ Có thể cập nhật nhanh chóng - Chỉ một máy để cập nhật.
+	+ Dễ dàng tách một nút ra khỏi hệ thống. Chỉ cần xóa kết nối của nút máy khách khỏi máy chủ và thì đấy! Nút tách rời.
+
++ kiến trúc không tập trung
+- Nhược điểm:
+	+ Khó đạt được các nhiệm vụ lớn toàn cầu - Không có chuỗi lệnh để chỉ huy người khác thực hiện các nhiệm vụ nhất định Không có sự giám sát về quy định
+	+ Khó biết nút nào bị lỗi - Mỗi nút phải được ping để kiểm tra tính khả dụng và phân vùng công việc phải được thực hiện để thực sự tìm ra nút nào bị lỗi bằng cách kiểm tra đầu ra dự 	  kiến ​​với những gì nút đã tạo
+	+ Khó biết nút nào đã phản hồi - Khi một yêu cầu được cung cấp bởi một hệ thống phi tập trung, yêu cầu thực sự được phục vụ bởi một trong các nút trong hệ thống nhưng thực sự rất 	  khó để tìm ra nút nào thực sự đã phục vụ yêu cầu.
+- Ưu điểm:
+	+ Sự cố tối thiểu xảy ra tắc nghẽn hiệu suất - Toàn bộ tải được cân bằng trên tất cả các nút; dẫn đến tối thiểu đến không có tình huống tắc nghẽn
+	+ Tính sẵn sàng cao - Một số nút (máy tính, điện thoại di động, máy chủ) luôn sẵn sàng / trực tuyến cho công việc, dẫn đến tính khả dụng cao
+	+ Quyền tự chủ và kiểm soát nhiều hơn đối với tài nguyên - Khi mỗi nút kiểm soát hành vi của riêng mình, nó có quyền tự chủ tốt hơn dẫn đến kiểm soát nhiều hơn đối với tài nguyên
+
+Câu 5.
+Nhược điểm của mạng overlay có cấu trúc, các thông điệp được định tuyến dựa theo hình trạng mạng (topology):
+ - Kết nối trên mạng Overlay là kết nối ảo.
+ - Không tối ưu về mặt vật lí.
+ - Tài nguyên phải phân bố một cách hợp lý để không có một máy tính nào lưu giữ quá nhiều dữ liệu dẫn đến quá tải thông tin định tuyến
+
+Câu 6.
++ Cơ chế khi P1 yêu cầu thì sẽ phải trải qua n-1 tiến trình xử lý khác.
+	- P1 gọi P2, P1 chờ và P2 gọi P3 ,.... Pn
+	- Sau đó P(n) ->(trả lời) P(n-1), P(n-1)->P(n-2), .... P(2)->P(1)
++ Vấn đề nẩy sinh
+	- Hiệu năng sẽ bị giảm do để tiến trình p1 chạy khi n-1 tiến trình khác phải được hoành thành
+	- Việc truyền dữ liệu giữa các tầng sẽ chậm hơn vì phải truyền giữa các tiến trình khác nhau, dữ liệu cần phải được đóng gói -> truyền đi -> mở gói trước khi có thể dùng được.
+	– Việc phát triển ứng dụng phức tạp hơn.
+Câu 7.
+Thuật toán tìm kiếm không tối ưu nhưng bù lại không cần lưu quá nhiều thông tin các vùng không phải hàng xóm
+Tìm kiếm trong mạng CAN: Một thông điệp CAN chứa tọa độ điểm đích. Sử dụng tập tọa độ vùng quản lý của các hàng xóm của nó, một node định tuyến thông điệp đến đích bằng cách sử dụng thuật toán tham lam chuyển thông điệp tới node nào có vùng quản lý gần nhất với tọa độ của điểm đích.
+Với N vùng và d chiều thì
++ Độ dài đường dẫn định tuyến trung bình là O(d ∗ N^(1 / d)) và mỗi nút cần duy trì 2d láng giềng
+
+
+
+

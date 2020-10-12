@@ -1,0 +1,79 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+
+1. Kiến trúc Microservices
+Câu 1.
+>cd vào folder microservices-demo để build và tải docker image của từng dịch vụ lên DockerHub 
+
+B1. đẩy apache
+>docker build --tag=microservice-kubernetes-demo-apache apache
+>docker tag microservice-kubernetes-demo-apache tvdinh1008/microservice-kubernetes-demo-apache:latest
+>docker push tvdinh1008/microservice-kubernetes-demo-apache
+
+B2. đẩy catalog
+> docker build --tag=microservice-kubernetes-demo-catalog microservice-kubernetes-demo-catalog
+> docker tag microservice-kubernetes-demo-catalog tvdinh1008/microservice-kubernetes-demo-catalog:latest
+> docker push tvdinh1008/microservice-kubernetes-demo-catalog
+
+B3. đẩy customer
+> docker build --tag=microservice-kubernetes-demo-customer microservice-kubernetes-demo-customer
+> docker tag microservice-kubernetes-demo-customer tvdinh1008/microservice-kubernetes-demo-customer:latest
+> docker push tvdinh1008/microservice-kubernetes-demo-customer
+
+B4. đẩy order
+> docker build --tag=microservice-kubernetes-demo-order microservice-kubernetes-demo-order
+> docker tag microservice-kubernetes-demo-order tvdinh1008/microservice-kubernetes-demo-order:latest
+> docker push tvdinh1008/microservice-kubernetes-demo-order
+
+Câu 2.
+Xuất hiện 4 repository:
+	+ microservice-kubernetes-demo-apache
+	+ microservice-kubernetes-demo-catalog
+	+ microservice-kubernetes-demo-customer
+	+ microservice-kubernetes-demo-order
+
+Câu 3.
+	+ Ban đầu trạng thái là ContainerCreating
+	+ Sau vài phút trạng thái là Running
+
+2. Kiến trúc JMS và DDS
+Câu 1.
+	Glassfish server là một application server mã nguồn mở được phát triền dựa trên nền JavaEE hổ trợ đầy đủ các tính năng cần thiết của JavaEE như web ứng dụng, Enterprise JavaBeans, JPA, JavaServer Faces, JMS, RMI, JavaServer Pages, Servlets, etc. Nó cho phép những nhà phát triển ứng dễ quản lý, cấu hình nhanh và linh hoạt. Glass server support nhiều nền tảng như windows, Linux, Mac Os... 
+
+Câu 2.
+	+ myTopicConnectionFactory(connection factory) : là nơi tạo ra thành phần định hướng đến địa chỉ hay tên gọi để truy cập vào JMS tương tự như khái 	niệm truy cập DataSource của kết nối dữ liệu
+	+ myTopic(destination): là nơi lưu trữ cho message
+	=> Khi cần thao tác sử dụng JMS, ứng dụng thực hiện tìm kiếm connection factory và destination để thao tác và thực hiện tác vụ của ứng dụng
+Câu 3.
+Sender:
+	+ Tạo và bắt đầu kết nối tới myTopicConnectionFactory
+	+ Tạo queue session
+	+ Tìm topic
+	+ Sau đó gửi dữ liệu - message theo topic
+	
+Receiver:
+	+ Tạo và bắt đầu kết nối tới myTopicConnectionFactory
+	+ Tạo topic session 
+	+ Tìm topic
+	+ Đăng ký lắng nghe khi có dữ liệu với topic
+	+ Khi có dữ liệu đến thì sẽ lấy dữ liệu và xử lý
+
+
+
+Câu 4.
+JMS:
+	+ Java Messaging Service
+	+ Java Message Oriented Middleware(MOM) API
+	+ Used for sending messages between two or more clients
+	+ Centrailized
+	+ Allows the communication between different components of a distributed application
+	+ Most commonly used
+	+ Many implementation(ActiveMQ, GlassFish, RabbitMQ,...)
+DDS:
+	+ Data distribution service
+	+ DDS is networking middleware that simplifies complex network programming
+	+ It implements a publish/subsribe model for sending and receiving data, events, and commands among the nodes
+	+ Decentralized
+	+ Automatically handles all aspects of message delivery
+	+ Automatically handles hot-swapping redundant punlishers if the primary fails.
