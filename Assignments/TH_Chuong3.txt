@@ -1,0 +1,43 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+Câu 1.
+Xuất hiện file package.json
+{
+  "name": "chatroomapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
+
+package.json là file đặc biệt, có thể hiểu nó là 1 document giúp bạn biết được trong cái đống code này cần có những gói nào (Nói thêm nodejs xây dựng dựa trên nhiều module gọi là package, quản lý thông quan npm).  Package.json là file cấu hình của npm, giúp cho npm hiểu nó cần phải cài đặt cái gì, thông tin về ứng dụng, phiên bản, …
+File package.json được viết bằng json
+File package.json được đặt ở thư mục gốc của project.
+
+Câu 2.
+Sau khi chạy server và gõ địa chỉ http://localhost:3000 thì trên browser nhận được dòng chữ:
+Hello World
+
+Câu 3.
++ Không có gì mới xuất hiện trên trình duyệt vì ta chưa thay đổi gì trong route khi response trả về.
++ Trên terminal cũng không xuất hiện dòng "New user connected"
+Vì phía client chưa gọi socket kết nối với socket phía server(mới khai báo socket trên server và chưa có kết nốt socket phía client).
+
+Câu 4.
+Khi refresh trang thì
++ Phía browser thấy hiển thị trang html có header là Chat room for Distributed Systems class. và có 2 dòng input để nhập
++ Phía termial có dòng : New user connected do phía client có khởi tạo
+	var socket=io.connect('http://localhost:3000')
+
+Câu 5. 
+Thấy bên dưới input username có 
+<username người đang gõ> + is typing a message...
+
+
+
+

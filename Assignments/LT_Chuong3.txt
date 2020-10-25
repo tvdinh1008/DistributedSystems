@@ -1,0 +1,77 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+
+Câu 1.
+#Nên giới hạn luồng trong một tiến trình server vì:
+
++ Độ phức tạp của ứng dụng do tài nguyên được chia sẻ
++ Mỗi luồng sẽ chờ đến lượt sử dụng một lõi CPU để thực hiện tính toán và vùng nhớ cục bộ (Ngăn xếp và nhiều khung trong ngăn xếp cho mỗi lệnh gọi phương thức) để lưu trữ kết quả tính toán tạm thời. Khi luồng hoàn thành thực thi mã, nó thường xóa kết quả trở lại RAM (Heap). Heap là vùng nhớ chung được chia sẻ giữa các luồng nơi tất cả các đối tượng sống. Stack là vùng nhớ riêng được phân bổ cho mỗi luồng đang chạy.
+Nên khi thêm luồng thì tốn stack và đến lúc nào đó tài nguyên bộ nhớ sẽ không đủ.
+
+Câu 2.
+#Nên chỉ gắn một luồng đơn duy nhất với một tiến trình nhẹ vì:
+	+ Mỗi tiến trình nhẹ có thể xem như một luồng đơn
+	+ Không ảnh hưởng tới luồng hay tiến trình khác
+	+ Do tiến trình nhẹ đã có cơ chế chia sẻ tài nguyên rồi nên ta sẽ kết hợp với tiến trình nhẹ khác.
+
+Câu 3.
+#Lý thuyêt: 
+	+ Tiến trình nhẹ là một tiến trình, nhưng thay vì có không gian địa chỉ, tài nguyên riêng biệt như khái niệm tiến trình bình thường, chúng có thể chia sẻ sử dụng chung tài nguyên với nhau như khái niệm của luồng trên user space.
+	+ Điểm khác biệt giữa tiến trình nhẹ và luồng là việc kernel nhìn tiến trình nhẹ như một tiến trình bình thường, nên kernel sẽ cung cấp tài nguyên hệ thống, lập lịch làm việc cho tiến trình nhẹ. Nên nếu hệ thống đang chạy hai tiến trình, một tiền trình đơn luồng, một tiến trình đa luồng gồm hai tiến trình nhẹ, thì tiến trình đa luồng đó sẽ chiếm 2/3 thời gian sử dụng CPU.
+
+#Không nên chỉ gắn 1 tiến trình nhẹ với 1 tiến trình
+	+Tiến trình nhẹ sinh ra để cải thiện việc cân bằng giữa hiệu năng và chi phí. Một tiến trình nên có nhiều tiến trình nhẹ đóng vài trò như các luồng thực thi, từ đó sẽ khai thác hiệu phần cứng quả hơn.
+	+ Nếu chỉ có một tiến trình nhẹ thì khi bị blocking system call thì tiến trình sẽ bị ảnh hưởng
+
+Câu 4.
+#Đơn luồng:
+Thời gian để nhận một yêu cầu: 15x2/3 +(15+75)x1/3=40(ms)
+=>Số yêu cầu/giây: 1000/40=25
+
+#Đa luồng: 1000/15
+
+
+Câu 5.
+#Hệ thống X-Window chỉ định máy của user chứa server, trong khi các ứng dụng lại được coi như client là hợp lý vì:
+	X chọn chỗ đứng của mình từ góc độ của chương trình ứng dụng, hơn là từ góc độ của người dùng, hay từ góc độ của phần cứng. Phần hiển thị địa phương của X cung cấp các dịch vụ hiển thị cho chương trình ứng dụng, và vì vậy nó hành động như một trình phục vụ(server). Bất cứ một chương trình ứng dụng(client) từ xa nào dùng các dịch vụ này của nó, sẽ hành xử như một trình khách.
+
+
+Câu 6.
+Giải pháp:
++ Cải thiện giao thức X protocol
++ Nén thông điệp
+
+Câu 7.
+#Đa luồng:
+	+ Chi phí lập trình cao
+	+ Tài nguyên chia sẻ, lập trình viên phải tự thực hiện việc tránh xung đột giữa các luồng
+	+ Chuyển đổi ngữ cảnh dễ dàng
+
+#Đa tiến trình:
+	+ Chi phí lập trình thấp
+	+ Tài nguyên tách biệt hệ điều hành sẽ thực hiện việc tránh xung đột, các lập trình viên không cần quan tâm đến các vấn đề này.
+	+ Chuyển đổi ngữ cảnh chậm, tốn tài nguyên hệ thống
+
+
+Câu 8.
+Trạng thái của WebServer là stateful vì webserver tổ chức lưu lại thông tin về địa chỉ IP của client và trang web client đó vừa truy cập
+
+Câu 9.
+#Virtual Machine:
+	+ Công nghệ ảo hóa
+	+ Chạy HĐH riêng bên trong một môi trường phần cứng giả lập được cung cấp bởi Hypervisor chạy trên phần cứng vật lý
+	+ Kernel riêng
+	+ Khởi động cả HĐH
+	+ Tốc độ chậm
+	+ Cần nhiều tài nguyên
+	+ Phân tách tài nguyên phần cứng rõ ràng
+
+#Docker:
+	+ Công nghệ container hóa
+	+ Container hóa cho phép nhiều ứng dụng chạy trên các partition độc lập trên linux kernel, và chạy trực tiếp trên phần cứng vật lý
+	+ Kernel chung với HĐH
+	+ Khởi động một số process
+	+ Tốc độ nhanh
+	+ Tiết kiệm tài nguyên
+	+ Phân tách tài nguyên tương đối, ứng dụng đóng gói dễ dàng kèm dependency
