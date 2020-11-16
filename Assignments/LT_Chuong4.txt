@@ -1,0 +1,79 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+Câu 1.
+Không nên. Vì nếu làm như vậy hệ thống sẽ không còn ý nghĩa phân tầng, các tầng cần độc lập trong suốt với nhau. Việc thay thế chung phần header sẽ làm mất tính trong suốt của hệ thống.
+
+Câu 2.
+- TH1: Lời gọi tham chiếu
+Mỗi con trỏ đều trỏ tới i, nếu i tăng 1 đơn vị -> i tăng 2 lần -> i=2
+- TH2: Phương pháp sao chép phục hồi được sử dụng
+Sao lưu không làm tăng giá trị. Ghi đè giá trị 2 lần -> i=1
+
+
+Câu 3. Một kết nối socket cần 4 thông tin nào? Tại sao phải cần đủ 4 thông tin đó?
+Socket = Địa chỉ IP + Số Port
+=> kết nối socket cần 2 cặp: địa chỉ ip, port nguồn và địa chỉ ip, port đích.
+Phải cần sử dụng đầy đủ 4 thông tin đó để đảm bảo thông tin được truyền đúng địa chỉ.
+
+Câu 4.Tại sao giao thức yêu cầu-trả lời (request-reply) lại được coi là đồng bộ và tin cậy?
+Vì:
+- Không cần báo nhận.
+- Không cần kiểm soát luồng.
+- Client gửi request, nó sẽ tự block mình và đợi phản hồi từ server.
+- Server tiếp nhận phản hồi từ client và gửi lại cho client.
+- Sau khi client tiếp nhận trả lời từ server nó mới tiếp tục làm việc khác.
+
+
+
+Câu 5. Hai vấn đề chính đối với giao thức RPC là gì?
+	- Thứ nhất, do phía gọi và phía bị gọi nằm ở hai máy tính khác nhau, nên chúng sẽ được thực thi trên những không gian địa chỉ khác nhau, và điều này gây ra sự phức tạp không nhỏ. Và tham số và kết quả trả về cũng phải được truyền di => gây ra sự phức tạp nếu như hai máy không tương tự nhau.
+	- Thứ hai, trong quá trình thực hiện, có thể một trong hai máy xảy ra lỗi, và lỗi này có thể gây ra một số vấn đề khác nữa
+=> Để khắc phục các vấn đề trên, người ta đã mở rộng mô hình RPC ra làm hai loại chính: Synchronous RPC và Asynchronous RPC.
+
+Câu 6.Vấn đề đối với truyền tham biến trong RPC là gì? Còn đồi với truyền tham chiếu? Giải pháp đưa ra là gì?
+	- Tham biến trong RPC là hệ thống không đồng nhất nên phải có cơ chế biểu diễn dữ liệu khác nhau
+nên không hiểu nhau.
+	- Tham chiếu thì mỗi máy có không gian nhớ khác nhau, địa chỉ máy này đưa cho máy kia nên không có ý nghĩa gì.
+=> Giải pháp: sử dụng interface
+
+Câu 7.So sánh RMI và RPC. Nhược điểm của RMI so với RPC là gì?
+#So sánh RMI và RPC:
++-------------------------------------------+-----------------------------------------------+
+|                    RMI                    |                       RPC                     |
++-------------------------------------------+-----------------------------------------------+
+|                          - Cùng hỗ trợ lập trình giao diện.                               |
+|                          - Dựa trên giao thức request/reply.                              |
+|                          - Trong suốt, client và server hoàn toàn độc lập.                |
++-------------------------------------------+-----------------------------------------------+
+| Đặc điểm:                                 | Đặc điểm:                                     |
+| - Đơn giản, dễ sử dụng, độ tin cậy cao.   | - Đơn giản hóa việc lập trình.                |
+| - Định danh duy nhất, truyền đối tượng.   | - RPC có tính mở, không đồng bộ.              |
+| - Có thể khai thác hết điểm mạnh của OOP. | - Giao diện thống nhất giữ server và client.  |
+| - Chỉ sử dụng cho Java.                   | - Sử dụng đa nền tảng.                        |
++-------------------------------------------------------------------------------------------+
+| Vấn đề:                                   | Vấn đề:                                       |
+| - Hệ thống không đồng nhất.               | - Định vị đối tượng từ xa.                    |
+|   + Không gian nhớ khác nhau.             | - Trao đổi thông tin các đối tượng.           |
+|   + Cách biểu diễn thông tin khác nhau.   | - Gọi các phương thức của đối tượng.          |
+| - Khi một trong hai máy bị hỏng.          |                                               |
++-------------------------------------------+-----------------------------------------------+
+#Nhược điểm của RMI so với RPC:
+	- Có thể là không an toàn, khi sử dụng Dynamic lớp tải (khách hàng phục vụ thực hiện các loại thông qua) - ví dụ bạn biết rằng rmi máy chủ gọi method() trên PassedObject, nhưng khách hàng tuyệt vời có thể ghi đè phương thức này và thực thi bất cứ điều gì anh ta muốn ...
+	- Khó thực hiện gọi lại. Nó sẽ hoạt động qua Internet (cần thiết lập kết nối mới từ máy chủ đến máy khách). thông qua NAT/router/tường lửa)
+	- Khi bạn đột nhiên ngắt kết nối trong khi thực hiện phương pháp từ xa, điều này xảy ra là phương pháp này sẽ không trả về.
+
+Câu 8.
+Ý nghĩa của tham số backlog trong hàm listen của TCPServer:
+Backlog thường được mô tả là giới hạn cho hàng đợi các kết nối đến. Điều này có nghĩa là hàng đợi có thể chứa các kết nối ở hai trạng thái khác nhau: SYN RECEIVED and ESTABLISHED.
+ 
+Câu 9.Trong trao đổi thông tin hướng dòng, những cơ chế thực thi QoS được thực hiện ở tầng nào? Giải thích. Trình bày một số cơ chế thực thi QoS để chứng minh điều đó.
+Thực thi QoS được thực thi ở tầng: tầng giao vận trở lên.
+Một số cơ chế thực thi QoS:
++ Differentiated services
++ Sử dụng bộ đệm để giảm jitter 
++ Forward error correction (FEC) 
+
+
+
+

@@ -1,0 +1,85 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+
+Câu 1.
+Đoạn code mà server gắn correlationID vào câu trả lời:
+	AMQP.BasicProperties replyProps = new AMQP.BasicProperties
+		.Builder()
+		.correlationId(delivery.getProperties().getCorrelationId())
+		.build();
+
+Câu 2.
+Đoạn code mà client gửi yêu cầu cho server thông qua hàng đợi rpc_queue:
+	final String corrId = UUID.randomUUID().toString();
+	String replyQueueName = channel.queueDeclare().getQueue();
+	AMQP.BasicProperties props = new AMQP.BasicProperties
+		.Builder()
+		.correlationId(corrId)
+		.replyTo(replyQueueName)
+		.build();
+	channel.basicPublish("", requestQueueName, props,message.getBytes("UTF-8"));
+
+Tạo hàng đợi mới để chờ câu trả lời từ server:
+	final BlockingQueue<String> response = new ArrayBlockingQueue<>(1);
+	String ctag = channel.basicConsume(replyQueueName, true,(consumerTag, delivery) -> {
+		if(delivery.getProperties().getCorrelationId().equals(corrId)) {
+			response.offer(new String(delivery.getBody(), "UTF-8"));
+		}
+	}, consumerTag -> {});
+	
+Câu 3.
+Thêm delay ở hàm tính fb và run nhiều Client:
+Timeout: 60.0 seconds ...
+Listing queues for vhost / ...
+name messages_ready messages_unacknowledged
+amq.gen-rvEPKwGFoa1HLCTKszanlQ  0       0
+amq.gen-Oc5NLLapQDMzYeBCooNCYw  0       0
+amq.gen-WkN7EVDAaiyF37I3wGzTvg  0       0
+amq.gen-nvAJMFhrRzoNVBjrqmiWHA  0       0
+rpc_queue       3       1
+
+Lệnh trả về bảng thông tin các queue:
+- name: tên queue
+- messages_ready : số thông điệp sẵn sàng để gửi cho client
+- messages_unacknowledged: số thông điệp đã gửi nhưng chưa nhận được phản hồi ACK
+
+
+Câu 4.
+Địa chỉ ip:
+	máy client(máy thật): 192.168.1.193
+	máy server(máy ảo): 192.168.1.228
+Máy ảo sử dụng card mạng: Bridged Adapter
+
+Câu 5.
+server: vlc -vvv mm.mpeg --sout '#standard{access=http,mux=ogg,dst=192.168.1.228:8080}'
+	client: vlc http://192.168.1.228:8080
+=>Client xem được video
+Chất lượng video xem khá ổn, không có hiện tượng gì bất thường
+
+Câu 6.
+server: sudo tc qdisc add dev enp0s8 root netem delay 100ms
+Lệnh ping từ server->client:
+	PING 192.168.1.193 (192.168.1.193) 56(84) bytes of data.
+	64 bytes from 192.168.1.193: icmp_seq=1 ttl=64 time=101 ms
+	64 bytes from 192.168.1.193: icmp_seq=2 ttl=64 time=102 ms
+
+=> Đã delay 100ms
+
+Câu 7.
+Delay ảnh hưởng tới dịch vụ truyền dòng video làm trải nghiệm xem video.
+
+Câu 8.
+Ảnh hưởng của độ biến đổi delay lên chất lượng video giảm có hiện tượng lag nhẹ.
+
+Câu 9.
+Khi tăng giá trị của tỷ lệ mất gói tin lên chất lượng video giảm.
+
+Câu 10.
+Khi tăng giá trị của tỷ lệ mất gói tin lên thì không xem được toàn bộ video.
+
+Câu 11.
+Khi tăng giá trị của tỷ lệ lặp gói tin chất lượng video tốt hơn.
+
+Câu 12.
+Không gây ảnh hưởng nhiều tới chất lượng dịch vụ.
