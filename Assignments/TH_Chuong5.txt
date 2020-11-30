@@ -1,0 +1,98 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+Câu 1.
++ Hardware type: Kiểu của mạng vật lý( Ethernet,Token ring…)
++ Protocol type: Xác định kiểu giao thức địa chỉ cấp cao máy gửi cung cấp
++ Hardware length: độ dài địa chỉ vật lý(MAC) (bit): Ethernet-48bits, Token ring-32bits
++ Protocol length: độ dài địa chỉ logic (bit):
+	1: là một ARP request.
+	2: là một ARP reply.
+	3: là một RARP request.
+	4: là một RARP reply.
++ Operation: Xác định kiểu thông điệp ARP(ARP Request=1, ARP Reply=2, RARP Request=3, RARP Reply=4)
++ Sender hardware address: Địa chỉ MAC máy gửi
++ Sender Protocol Address: địa chỉ IP máy gửi
++ Target hardware address: Địa chỉ MAC máy đích
++ Target Protocol Address: địa chỉ IP máy đích
+
+Ping A->B
+Câu 2: 
+b1. cài wireshark
+>sudo apt install wireshark
+b2. run với quyền admin
+>sudo wireshark
+thôg điệp ARP request trên máy B
+- Sender MAC address: e4:02:9b:9c:05:1d
+- Opcode: request(1)
+- Target MAC address: 00:00:00:00:00:00
+
+Câu 3:
+thông điệp ARP reply trên máy A:
+- Opcode: reply(2)
+- Sender MAC address: 4c:49:e3:cf:ec:a7
+- Sender IP address: 192.168.1.52
+- Target MAC address: e4:02:9b:9c:05:1d
+- Target IP address: 192.168.1.193
+
+Câu 4:
+Thông tin ghi lại ở bảng ARP của máy A khi chạy arp-a 
+? (192.168.1.1) at 80:69:33:f6:52:86 [ether] on wlp1s0
+? (192.168.1.52) at 4c:49:e3:cf:ec:a7 [ether] on wlp1s0
+
+Kết luận:
+- Trước khi bất kỳ thiết bị nào gửi dữ liệu đến một thiết bị đích khác, nó phải xác định địa chỉ MAC của mục tiêu đó với địa chỉ IP của nó. Các quá trình ánh xạ địa chỉ IP thành MAC này được lấy từ một ARP cache duy trì trên mỗi thiết bị.
+- Nếu địa chỉ IP đã cho không xuất hiện trong bộ nhớ cache của thiết bị, thiết bị đó không thể chuyển hướng thông báo đến mục tiêu cho đến khi có được ánh xạ mới. Để thực hiện việc này, trước tiên thiết bị khởi tạo sẽ gửi một thông điệp yêu cầu ARP trên mạng con cục bộ. Host có địa chỉ IP đã cho sẽ gửi phản hồi ARP để phản hồi lại chương trình đưa ra yêu cầu, cho phép thiết bị khởi tạo cập nhật bộ nhớ cache của nó và tiến hành gửi thông báo trực tiếp đến mục tiêu.
+
+Câu 5.
+Block forwarders: 
+	- Để các máy client có thể phân giải được một số tên miền hoặc địa chỉ IP không có trong DNS server ta cần forward lời đề nghị đó đến một DNS server khác.
+	
+Block options:
+	- Cho phép Master cấu hình các lựa chọn như truy vấn đệ quy, forwarders nếu không tìm thấy khi máy slave yêu cầu.
+
+Câu 6:
+Forward: sẽ dịch tên DNS thành địa chỉ IP
+Reverse: ngược lại với Forward Lookup Zone có nghĩa là nó thay đổi địa chỉ IP thành tên DNS, tức là khi bạn cung cấp một địa chỉ IP, nó sẽ cung cấp cho bạn tên DNS
+
+Câu 7:
+Tệp db.ds.soict.hust.com và db.192.168.1 để chuyển dữ liệu zone sang các DNS Server ds.soict.hust.com và 1.168.192.in-addr.arpa
+
+
+Câu 8. Ba kiểu bản ghi của DNS:SOA, NS, A.
+- SOA (Start of Authority): Trong mỗi tập tin cơ sở dữ liệu DNS phải có một và chỉ một record SOA. Bao gồm các thông tin về domain trên DNS Server, thông tin về zone transfer.
+Ví dụ:
+	$TTL 86400
+	@       IN SOA  masterdns.dinh.com.     admin.dinh.com. (
+		                          2014090401    ; serial
+		                                3600    ; refresh
+		                                1800    ; retry
+		                              604800    ; expire
+		                               86400 )  ; TTL
+                                       
+- NS (Name Server): Record tiếp theo cần có trong zone là NS (name server) record. Mỗi name server cho zone sẽ có một NS record. Chứa địa chỉ IP của DNS Server cùng với các thông tin về domain đó.
+Ví dụ : Record NS sau
+	cloud365.vn. IN NS ns1.zonedns.vn.
+	cloud365.vn. IN NS ns2.zonedns.vn.
+- Record A: Là một record căn bản và quan trọng, dùng để ánh xạ từ một domain thành địa chỉ IP cho phép có thể truy cập website. Đây là chức năng cốt lõi của hệ thống DNS.
+Ví dụ:
+Record A có dạng như sau:
+	cloud365.vn   A    103.101.161.201
+Tên miền con (subdomain):
+	sub.cloud365.vn   A   103.101.161.201
+
+
+Câu 9:
+
+Câu 10:
+Lệnh nào để chắc chắn là bind9 đang chạy:
+>sudo systemctl status bind9
+Sử dụng lệnh $dig NS tên miền
+Hoặc $sudo named-checkzone ...
+
+Câu 11:
+
+Câu 12:
+
+Câu 13:
+

@@ -1,0 +1,98 @@
+Họ tên SV: Trần Văn Định	Mã lớp: 118636
+MSSV: 20173017			Mã HP: IT4611
+
+
+Câu hỏi 1: Tại sao không thể lấy địa chỉ của Access Point để sử dụng như địa chỉ của thực thể?
+	+ Thực thể: hầu như bất kỳ những gì có trong hệ thống(Host, printer, file, người dùng, tiến trình,...)
+	+ Access point: điểm truy cập vào một entity và một entity có thể có nhiều điểm truy cập khác nhau.
+	=>Thông tin có thể di chuyển từ Access point này sang Access point khác.
+
+Câu hỏi 2: Với việc sử dụng Định Danh, các vấn đề gì cần phải xem xét?
+¤ Vấn đề:
+	- Không gian định danh hữu hạn.
+	- Cạn kiệt định danh.
+¤ Giải pháp:
+	- Sử dụng lại.
+	- Có khả năng bị trùng lặp.
+
+Câu hỏi 3:
+Mô hình kết hợp cả dịch vụ tổ chức vị trí phân cấp và cơ chế chuyển tiếp con trỏ (forwarding pointers) để có thể xác định được vị trí của thực thể khi nó ở các nút trung gian.
+	- Khi thông tin dịch chuyển vị trí trung gian A và B, để lại con trỏ khi đến B ghi thêm địa chỉ mới đó ==> Mô hình phân cấp.
+	- Chuỗi con trỏ trung gian và địa chỉ A đều bị xóa.
+
+Câu hỏi 4: Trình bày một số phương pháp ARP Spoofing để thấy được điểm yếu của phương pháp định danh sử dụng cơ chế quảng bá.
+
+¤ Giao thức ARP: 
+	Khi một gói tin được gửi từ một máy đến máy khác trong mạng cục bộ, địa chỉ IP dích phải được giải quyết thành địa chỉ MAC đển truyền qua tầng liên kết dữ liệu. Khi biết được địa chỉ IP của máy đích và địa chỉ MAC của nó cần truy cập, một gói tin broadcast được gửi đi trên mạng nội bộ. Gói này được gọi là ARP request. Máy đích với IP trong ARP request sẽ trả lời với ARP reply, nó chứa địa chỉ MAC cho IP đó 
+	=> Khi một gói tin được gửi từ một máy đến máy khác trong mạng cục bộ, địa chỉ IP dích phải được giải quyết thành địa chỉ MAC đển truyền qua tầng liên kết dữ liệu. Khi biết được địa chỉ IP của máy đích và địa chỉ MAC của nó cần truy cập, một gói tin broadcast được gửi đi trên mạng nội bộ. Gói này được gọi là ARP request. Máy đích với IP trong ARP request sẽ trả lời với ARP reply, nó chứa địa chỉ MAC cho IP đó
+	=> Lỗ hổng cho phép ARP Spoofing xẩy ra.
+
+¤ ARP Spoofing:
+	- Host A muốn gửi dữ liệu cho Victim->A phải biết địa chỉ Mac của Victim. Khi đó A sẽ gửi tin broadcast ARP request tới tất cả máy trong mạng LAN hỏi địa chỉ IP có MAC là gì.
+	- Attacker sẽ gửi liên tục các gói tin reply cho Host A chứa nội dung: IP của victim và MAC attacker, MAC Host A để làm cho Host A tưởng rằng dữ liệu cần phải gửi  tới có địa chỉ đích là MAC của Attacker
+	=> Mọi dữ liệu trên đường truyền đều qua Attacker.
+
+¤ Một số phương pháp ARP Spoofing:
+	- Man-in-the-middle.
+	- MAC Spoofing.
+	- Session Hijacking.
+	- Nghe trộm, chặn bắt gói tin.
+
+Câu hỏi 5: Vấn đề còn tồn tại đối với cơ chế chuyển tiếp con trỏ (Forwarding Pointer) là gì?
+¤ Chuỗi dài vô hạn.
+	- Giải pháp: sử dụng các short cut
+	- Có khả năng có chuỗi không tham chiếu được
+¤ Lưu trữ vô số các tham chiếu.
+	- Giải pháp: loại bỏ các tham chiếu
+	- Khi nào có thể loại bỏ các tham chiếu
+	- Bài toán toàn cục
+=> Giải pháp home-based
+
+Câu hỏi 6: Nhược điểm của giải pháp Home-based là gì? Giải pháp nào để giải quyết nhược điểm đó?
+¤ Nhược điểm của giải pháp Home-based: Vấn đề quy mô.
+	- Mỗi khi di chuyển sẽ tự động cập nhật home-agent.
+	- Khi thực thể di chuyển đủ xa home-agent và đủ lâu, nó sẽ được gán bằng home-agent mới gần nó hơn.
+	- Nhược điểm quan trọng của phương pháp home-based chính là sự sử dụng địa chỉ tĩnh cho địa điểm quản lý. Có một điều cần chú ý là người ta phải chắc chắn rằng nơi quản lý thì luôn luôn tồn tại. 
+
+¤ Giải pháp cho vấn đề này là đăng ký nơi quản lý như là một dịch vụ tên truyền thống và để cho máy khách tìm kiếm địa điểm của nơi quản lý đầu tiên. Bởi vì có thể cho rằng địa điểm của nơi quản lý là tương đối ổn định, địa điểm đó có thể được lưu trữ hiệu quả sau khi nó được tìm kiếm
+
+Câu hỏi 7: Khi áp dụng giải pháp sử dụng hàm băm phân tán vào hệ thống Chord thì nó đã tối ưu cơ chế định danh như thế nào?
+	- Dễ dàng mở rộng với số lượng lớn nút tham gia, và cung cấp khả năng duy trì hệ thống khi có nút tham gia, rời khỏi mạng, hay bị lỗi.
+-	- Mỗi nút chỉ chứa thông tin O(logN) nút khác và giải quyết tất cả tìm kiếm nhiều O(logN) thông điệp tới nút khác
+
+Câu hỏi 8: Trong giải pháp phân cấp, sử dụng cơ chế bộ đệm có tác dụng cải thiện hiệu năng như thế nào? Cho ví dụ.
+¤ Sử dụng cơ chế bộ đệm trong giải pháp phân cấp:
+	- Các kết quả được lưu lại vào cache.
+	- Lần tới có thể truy suất ngay mà không cần tính toán, tìm kiếm, ...
+¤ Ví dụ: bài toán tìm kiếm.
+	- Không có cache: M->A->C và M biết E và A không biết E
+	khi đó C tìm E nó sẽ đi C->A->M->..->E
+	- Nếu có cache thì C->E luôn.
+
+Câu hỏi 9: So sánh liên kết vật lý và liên kết biểu tượng trong hệ thống quản lý tệp của UNIX.
+So sánh liên kết vật lý và liên kết biểu tượng trong hệ thống quản lý tệp của UNIX
++-------------------------------------------+-----------------------------------------------+
+|       Liên kết vật lí (hard link)         |        Liên kết biểu tượng (soft link)        |
++-------------------------------------------------------------------------------------------+
+| - Một liên kết vật lí là một quan hệ giữa | - Khi tạo liên kết biểu tượng, một inode mới  |
+|   tên tệp trong thư mục với một inode.    |   được tạo ra.                                |
+| - Có thể nhiều liên kết vật lí - 1 inode. | - Inode này chứa tên của phần tử được trỏ tới.|                                               |
+| - Liên kết cuối cùng tới inode bị xóa thì | - Khi xóa một file, các file khác không ảnh   |
+|   các khối liên quan tới inode cũng bị xóa|   hưởng.                                      |
++-------------------------------------------------------------------------------------------+
+
+
+Câu hỏi 10: Khi chúng ta thêm 1 node mới vào hệ thống Chord, chúng ta có cần phải cập nhật toàn bộ các bảng finger?
+¤ Không cần cập nhật toàn bộ các mảng finger.
+¤ Vì hệ thông gồm N - node, trong đó mỗi nút chứa thông tin về O(log N) node xung quanh nó, và tìm kiếm các node khác thông qua O(log N) thông điệp tới các node đó. Với hệ thông có tần suất các node tham gia/ rời khỏi mạng cao, một node khi tham gia hay một node cần định tuyến lại cũng chỉ cần gửi không quá O(log2 N) thông điệp để ổn định thông tin định tuyến.
+
+Câu hỏi 11: Phân giải tên đệ qui có ưu điểm gì so với phân giải tên không đệ qui?
+¤ Ưu điểm của phân giải đệ quy so với phân giải không đệ quy:
++-------------------------------------------+-----------------------------------------------+
+|          Phân giải tên có đệ quy          |           Phân giải tên không đệ quy          |
++-------------------------------------------------------------------------------------------+
+| - Xử lí nhiều ở bên server.               | - Xử lí nhiều ở bên client.                   |
+| - Các name server tổ chức lưu trữ cache   | - Trường hợpclient ở xa độ trễ tăng do việc   |
+|   + Server lưu trữ kết quả.               |   gửi đi gửi lại                              |
+|   + Có thể trả lời nhanh cho client.      |                                               |
++-------------------------------------------+-----------------------------------------------+
